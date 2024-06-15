@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "274315597684",
+    "project_id": "mindspace-8251b",
+    "storage_bucket": "mindspace-8251b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:274315597684:android:6c4d2e51493a1544efbe21",
+        "android_client_info": {
+          "package_name": "com.example.ms"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBGliZcjBkdDmcQeNO43n2PxABF3JLh0D0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
