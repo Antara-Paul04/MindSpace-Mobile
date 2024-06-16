@@ -1,11 +1,51 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ms/resources/auth.dart%20';
 import 'login.dart';
 import '../utils/colors.dart';
 import 'package:icons_plus/icons_plus.dart';
 
-class Signup extends StatelessWidget {
+class Signup extends StatefulWidget {
   const Signup({super.key});
+
+  @override
+  State<Signup> createState() => _SignupState();
+}
+
+class _SignupState extends State<Signup> {
+  final TextEditingController userNameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  bool isLoading = false;
+
+  @override
+  void dispose() {
+    super.dispose();
+    userNameController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+  }
+
+  void signUpUser() async {
+    setState(() {
+      isLoading = true;
+    });
+    String res = await AuthMethods().signupUser(
+        email: emailController.text,
+        password: passwordController.text,
+        userName: userNameController.text);
+    setState(() {
+      isLoading = false;
+    });
+    if (res != 'success') {
+      print(res);
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(res)));
+      return;
+    }
+    // Navigator.of(context)
+    //     .push(MaterialPageRoute(builder: (ctx) => const Login()));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,15 +75,16 @@ class Signup extends StatelessWidget {
                   style: GoogleFonts.lexend(
                       fontSize: 16, color: const Color.fromARGB(82, 0, 0, 0)),
                 ),
-                SizedBox(height: 40),
+                const SizedBox(height: 40),
 
                 // Username Text-box
                 Text('Username', style: GoogleFonts.lexend(fontSize: 20)),
-                SizedBox(height: 4),
+                const SizedBox(height: 4),
                 TextField(
+                  controller: userNameController,
                   decoration: InputDecoration(
-                    prefixIcon: Padding(
-                      padding: const EdgeInsets.all(15.0),
+                    prefixIcon: const Padding(
+                      padding: EdgeInsets.all(15.0),
                       child: Icon(
                         OctIcons.person,
                         size: 30,
@@ -55,27 +96,28 @@ class Signup extends StatelessWidget {
                         GoogleFonts.lexend(fontSize: 18, color: strokeColour),
                     filled: true,
                     fillColor: Colors.white,
-                    enabledBorder: OutlineInputBorder(
+                    enabledBorder: const OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(15)),
                       borderSide: BorderSide(
                           color: Color.fromARGB(63, 0, 0, 0), width: 1.5),
                     ),
-                    focusedBorder: OutlineInputBorder(
+                    focusedBorder: const OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(15)),
                       borderSide: BorderSide(
                           color: Color.fromARGB(63, 0, 0, 0), width: 1.5),
                     ),
                   ),
                 ),
-                SizedBox(height: 25),
+                const SizedBox(height: 25),
 
                 // Email text-box
                 Text('Email', style: GoogleFonts.lexend(fontSize: 20)),
-                SizedBox(height: 4),
+                const SizedBox(height: 4),
                 TextField(
+                  controller: emailController,
                   decoration: InputDecoration(
-                    prefixIcon: Padding(
-                      padding: const EdgeInsets.all(15.0),
+                    prefixIcon: const Padding(
+                      padding: EdgeInsets.all(15.0),
                       child: Icon(
                         OctIcons.mail,
                         size: 30,
@@ -87,27 +129,28 @@ class Signup extends StatelessWidget {
                         GoogleFonts.lexend(fontSize: 18, color: strokeColour),
                     filled: true,
                     fillColor: Colors.white,
-                    enabledBorder: OutlineInputBorder(
+                    enabledBorder: const OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(15)),
                       borderSide: BorderSide(
                           color: Color.fromARGB(63, 0, 0, 0), width: 1.5),
                     ),
-                    focusedBorder: OutlineInputBorder(
+                    focusedBorder: const OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(15)),
                       borderSide: BorderSide(
                           color: Color.fromARGB(63, 0, 0, 0), width: 1.5),
                     ),
                   ),
                 ),
-                SizedBox(height: 25),
+                const SizedBox(height: 25),
 
                 // Password text-box
                 Text('Password', style: GoogleFonts.lexend(fontSize: 20)),
-                SizedBox(height: 4),
+                const SizedBox(height: 4),
                 TextField(
+                  controller: passwordController,
                   decoration: InputDecoration(
-                    prefixIcon: Padding(
-                      padding: const EdgeInsets.all(15.0),
+                    prefixIcon: const Padding(
+                      padding: EdgeInsets.all(15.0),
                       child: Icon(
                         OctIcons.lock,
                         size: 30,
@@ -119,38 +162,49 @@ class Signup extends StatelessWidget {
                         GoogleFonts.lexend(fontSize: 18, color: strokeColour),
                     filled: true,
                     fillColor: Colors.white,
-                    enabledBorder: OutlineInputBorder(
+                    enabledBorder: const OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(15)),
                       borderSide: BorderSide(
                           color: Color.fromARGB(63, 0, 0, 0), width: 1.5),
                     ),
-                    focusedBorder: OutlineInputBorder(
+                    focusedBorder: const OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(15)),
                       borderSide: BorderSide(
                           color: Color.fromARGB(63, 0, 0, 0), width: 1.5),
                     ),
                   ),
                 ),
-                SizedBox(height: 40),
+                const SizedBox(height: 40),
 
                 // Signup Button
                 SizedBox(
                   width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    child: Text('Sign up',
-                        style: GoogleFonts.lexend(
-                            fontSize: 20, color: Colors.white)),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: primaryColour,
-                      padding: EdgeInsets.symmetric(vertical: 15),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15),
-                      ),
+                  child: InkWell(
+                    onTap: signUpUser,
+                    focusColor: primaryColour,
+                    highlightColor: primaryColour,
+                    customBorder: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15),
                     ),
+                    child: isLoading
+                        ? const Center(
+                            child: CircularProgressIndicator(),
+                          )
+                        : Container(
+                            width: double.infinity,
+                            height: 60,
+                            decoration: BoxDecoration(
+                                color: primaryColour,
+                                borderRadius: BorderRadius.circular(15)),
+                            child: Center(
+                              child: Text('Sign up',
+                                  style: GoogleFonts.lexend(
+                                      fontSize: 25, color: Colors.white)),
+                            ),
+                          ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 Center(
@@ -165,18 +219,19 @@ class Signup extends StatelessWidget {
                         onPressed: () {
                           Navigator.pushReplacement(
                             context,
-                            MaterialPageRoute(builder: (context) => Login()),
+                            MaterialPageRoute(
+                                builder: (context) => const Login()),
                           );
                         },
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.transparent,
+                            padding: const EdgeInsets.all(0),
+                            shadowColor: Colors.transparent),
                         child: Text(
                           'Login',
                           style: GoogleFonts.lexend(
                               color: primaryColour, fontSize: 16),
                         ),
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.transparent,
-                            padding: EdgeInsets.all(0),
-                            shadowColor: Colors.transparent),
                       )
                     ],
                   ),

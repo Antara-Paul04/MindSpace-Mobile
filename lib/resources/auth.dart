@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -22,7 +21,7 @@ class AuthMethods {
             .doc(cred.user!.uid)
             .set({'email': email, 'password': password, 'username': userName});
 
-        res = 'Success';
+        res = 'success';
       }
     } on FirebaseAuthException catch (err) {
       if (err.code == 'invalid-email') {
