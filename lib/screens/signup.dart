@@ -199,7 +199,7 @@ class _SignupState extends State<Signup> {
                             child: Center(
                               child: Text('Sign up',
                                   style: GoogleFonts.lexend(
-                                      fontSize: 25, color: Colors.white)),
+                                      fontSize: 22, color: Colors.white)),
                             ),
                           ),
                   ),
