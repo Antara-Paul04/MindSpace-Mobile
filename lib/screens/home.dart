@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:ms/utils/colors.dart';
+import 'package:ms/widgets/main_drawer.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key, required this.userName});
@@ -10,16 +11,21 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: const MainDrawer(),
       backgroundColor: bgColour,
       appBar: AppBar(
-        actions: [
-          IconButton(
-              onPressed: () {},
+        leading: Builder(builder: (context) {
+          return IconButton(
+              onPressed: () {
+                Scaffold.of(context).openDrawer();
+              },
               icon: const Icon(
                 BoxIcons.bx_grid_vertical,
                 color: primaryColour,
                 size: 35,
-              )),
+              ));
+        }),
+        actions: [
           const Spacer(),
           CircleAvatar(
             radius: 26,

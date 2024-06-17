@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'MindSpace',
       // home: SplashScreen(),
-      home: Signup(),
+      home: HomeScreen(userName: 'Subroto',),
     );
   }
 }
