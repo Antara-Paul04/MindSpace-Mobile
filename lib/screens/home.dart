@@ -4,7 +4,8 @@ import 'package:icons_plus/icons_plus.dart';
 import 'package:ms/utils/colors.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  const HomeScreen({super.key, required this.userName});
+  final String userName;
 
   @override
   Widget build(BuildContext context) {
@@ -44,8 +45,21 @@ class HomeScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Align(alignment: Alignment.topLeft,child: Text('Good Morning,',style: GoogleFonts.lexend(fontSize: 25,fontWeight: FontWeight.w500, color: Colors.black,height: 1))),
-              Align(alignment: Alignment.topLeft,child: Text('Antara!', style: GoogleFonts.lexend(fontSize: 25,fontWeight: FontWeight.w500, color: primaryColour))),
+              Align(
+                  alignment: Alignment.topLeft,
+                  child: Text('Good Morning,',
+                      style: GoogleFonts.lexend(
+                          fontSize: 25,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.black,
+                          height: 1))),
+              Align(
+                  alignment: Alignment.topLeft,
+                  child: Text('$userName!',
+                      style: GoogleFonts.lexend(
+                          fontSize: 25,
+                          fontWeight: FontWeight.w500,
+                          color: primaryColour))),
             ],
           ),
         ),

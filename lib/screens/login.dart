@@ -74,6 +74,7 @@ class Login extends StatelessWidget {
                 Text('Password', style: GoogleFonts.lexend(fontSize: 20)),
                 SizedBox(height: 4),
                 TextField(
+                  obscureText: true,
                   decoration: InputDecoration(
                     prefixIcon: Padding(
                       padding: const EdgeInsets.all(15.0),
