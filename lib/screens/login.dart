@@ -3,7 +3,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:ms/resources/auth.dart';
 import 'signup.dart';
 import '../utils/colors.dart';
+import 'home.dart';
 import 'package:icons_plus/icons_plus.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -13,6 +15,7 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   bool isLoading = false;
@@ -28,18 +31,21 @@ class _LoginState extends State<Login> {
     setState(() {
       isLoading=true;
     });
-    String res = await AuthMethods().loginUser(
+    var res = await AuthMethods().loginUser(
       email: emailController.text, 
       password: passwordController.text
       );
     setState(() {
       isLoading= false;
     });
-    if (res !='success'){
+    if (res[0] !='success'){
       print(res);
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(res)));
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(res[0])));
       return;
     }
+    // var  userName = await _firestore.collection('user').doc(res[1]);
+    Navigator.of(context)
+        .pushReplacement(MaterialPageRoute(builder: (ctx) => HomeScreen(userName: res[1])));
   }
 
   @override

@@ -14,7 +14,7 @@ class AuthMethods {
       if (email.isNotEmpty || password.isNotEmpty || userName.isNotEmpty) {
         UserCredential cred = await _auth.createUserWithEmailAndPassword(
             email: email, password: password);
-        print(cred.user!.uid);
+        // print(cred.user!.uid);
 
         await _firestore
             .collection('user')
@@ -34,32 +34,40 @@ class AuthMethods {
     }
     return res;
   }
-  Future<String> loginUser(
-    {required String email,
-      required String password,})async{
-        String res = 'Some error occurred';
-        try{
-          if (email.isNotEmpty && password.isNotEmpty){
-            UserCredential cred= await _auth.signInWithEmailAndPassword(
-              email: email,
-              password: password,
+
+  Future<dynamic> loginUser({
+    required String email,
+    required String password,
+  }) async {
+    List<dynamic> res = ['Some error occured',''];
+    try {
+      if (email.isNotEmpty && password.isNotEmpty) {
+        UserCredential cred = await _auth.signInWithEmailAndPassword(
+          email: email,
+          password: password,
         );
-        res='success';
-        print('User ID: ${cred.user!.uid}');
-          }
-          else{
-            res='Please fill in all fields';
-          }
-        } on FirebaseAuthException catch (err){
-          print('Error code: ${err.code}');
-          if (err.code == 'user-not-found'){
-            res='User not found for this email';
-          } else if (err.code == 'wrong-password'){
-            res= 'Entered password is wrong';
-          }
-        }catch (e){
-          res=e.toString();
-        }
-        return res;
+        var userId = cred.user!.uid;
+        // print(userId);
+        var docRef = _firestore.collection('user').doc(userId);
+        var userName = docRef.get().then((DocumentSnapshot doc) {
+          final data = doc.data() as Map<String, dynamic>;
+          res[1] = data['username'];
+        });
+        res[0] = 'success';
+        print(res);
+      } else {
+        res[0] = 'Please fill in all fields';
       }
+    } on FirebaseAuthException catch (err) {
+      // print('Error code: ${err.code}');
+      if (err.code == 'user-not-found') {
+        res[0] = 'User not found for this email';
+      } else if (err.code == 'wrong-password') {
+        res[0] = 'Entered password is wrong';
+      }
+    } catch (e) {
+      res[0] = e.toString();
+    }
+    return res;
+  }
 }
