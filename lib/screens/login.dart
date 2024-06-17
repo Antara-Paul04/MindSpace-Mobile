@@ -1,11 +1,47 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ms/resources/auth.dart';
 import 'signup.dart';
 import '../utils/colors.dart';
 import 'package:icons_plus/icons_plus.dart';
 
-class Login extends StatelessWidget {
+class Login extends StatefulWidget {
   const Login({super.key});
+
+  @override
+  State<Login> createState() => _LoginState();
+}
+
+class _LoginState extends State<Login> {
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  bool isLoading = false;
+
+  @override
+  void dispose() {
+    super.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+  }
+
+  void loginUser() async{
+    setState(() {
+      isLoading=true;
+    });
+    String res = await AuthMethods().loginUser(
+      email: emailController.text, 
+      password: passwordController.text
+      );
+    setState(() {
+      isLoading= false;
+    });
+    if (res !='success'){
+      print(res);
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(res)));
+      return;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,6 +78,7 @@ class Login extends StatelessWidget {
                     style: GoogleFonts.lexend(fontSize: 20)),
                 SizedBox(height: 4),
                 TextField(
+                  controller: emailController,
                   decoration: InputDecoration(
                     prefixIcon: Padding(
                       padding: const EdgeInsets.all(15.0),
@@ -74,7 +111,11 @@ class Login extends StatelessWidget {
                 Text('Password', style: GoogleFonts.lexend(fontSize: 20)),
                 SizedBox(height: 4),
                 TextField(
+
                   obscureText: true,
+
+                  controller: passwordController,
+
                   decoration: InputDecoration(
                     prefixIcon: Padding(
                       padding: const EdgeInsets.all(15.0),
@@ -106,18 +147,29 @@ class Login extends StatelessWidget {
                 // Login Button
                 SizedBox(
                   width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    child: Text('Login',
-                        style: GoogleFonts.lexend(
-                            fontSize: 20, color: Colors.white)),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: primaryColour,
-                      padding: EdgeInsets.symmetric(vertical: 15),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15),
-                      ),
+                  child: InkWell(
+                    onTap: loginUser,
+                    focusColor: primaryColour,
+                    highlightColor: primaryColour,
+                    customBorder: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15),
                     ),
+                    child: isLoading
+                        ? const Center(
+                            child: CircularProgressIndicator(),
+                          )
+                        : Container(
+                            width: double.infinity,
+                            height: 60,
+                            decoration: BoxDecoration(
+                                color: primaryColour,
+                                borderRadius: BorderRadius.circular(15)),
+                            child: Center(
+                              child: Text('Login',
+                                  style: GoogleFonts.lexend(
+                                      fontSize: 22, color: Colors.white)),
+                            ),
+                          ),
                   ),
                 ),
                 SizedBox(
