@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ms/screens/signup.dart';
 import 'screens/login.dart';
 import 'screens/splash_screen.dart';
+import 'screens/home.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'MindSpace',
       // home: SplashScreen(),
-      home: Login(),
+      home: HomeScreen(userName: 'Subroto',),
     );
   }
 }

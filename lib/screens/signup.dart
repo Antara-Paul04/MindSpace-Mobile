@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ms/resources/auth.dart%20';
+import 'package:ms/screens/home.dart';
 import 'login.dart';
 import '../utils/colors.dart';
 import 'package:icons_plus/icons_plus.dart';
@@ -38,12 +39,12 @@ class _SignupState extends State<Signup> {
       isLoading = false;
     });
     if (res != 'success') {
-      print(res);
+      // print(res);
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(res)));
       return;
     }
-    // Navigator.of(context)
-    //     .push(MaterialPageRoute(builder: (ctx) => const Login()));
+    Navigator.of(context)
+        .pushReplacement(MaterialPageRoute(builder: (ctx) => HomeScreen(userName: userNameController.text)));
   }
 
   @override
@@ -148,6 +149,7 @@ class _SignupState extends State<Signup> {
                 const SizedBox(height: 4),
                 TextField(
                   controller: passwordController,
+                  obscureText: true,
                   decoration: InputDecoration(
                     prefixIcon: const Padding(
                       padding: EdgeInsets.all(15.0),
