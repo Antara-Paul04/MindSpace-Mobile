@@ -31,23 +31,25 @@ class HomeScreen extends StatelessWidget {
         }),
         actions: [
           const Spacer(),
-          Container(
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(color: strokeColour, width: 1)
-              ),
-              child: CircleAvatar(
-                backgroundColor: Colors.white,
-                radius: 25,
-                child: IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.notifications_none_rounded,
-                      color: primaryColour,
-                      size: 30,
-                    )),
-              ),
-            ),
+          Padding(
+            padding: const EdgeInsets.all(15),
+            child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  shape: BoxShape.circle,
+                  border: Border.all(color: strokeColour, width: 1)
+                ),
+                child: Center(
+                  child: IconButton(
+                        onPressed: () {},
+                        icon: const Icon(
+                          Icons.notifications_none_rounded,
+                          color: primaryColour,
+                          size: 30,
+                        )),
+                ),
+                ),
+          ),
         ],
         backgroundColor: bgColour,
       ),
