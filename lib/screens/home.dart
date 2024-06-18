@@ -4,6 +4,7 @@ import 'package:icons_plus/icons_plus.dart';
 import 'package:ms/utils/colors.dart';
 import 'package:ms/widgets/main_drawer.dart';
 import 'package:ms/widgets/mood_tracker.dart';
+import 'package:ms/widgets/time.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key, required this.userName});
@@ -61,12 +62,8 @@ class HomeScreen extends StatelessWidget {
             children: [
               Align(
                   alignment: Alignment.topLeft,
-                  child: Text('Good Morning,',
-                      style: GoogleFonts.lexend(
-                          fontSize: 30,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.black,
-                          height: 1))),
+                  child: CustomMessage(),
+              ),
               Align(
                   alignment: Alignment.topLeft,
                   child: Text('$userName!',
