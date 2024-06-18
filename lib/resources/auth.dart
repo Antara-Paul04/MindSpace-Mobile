@@ -49,12 +49,14 @@ class AuthMethods {
         var userId = cred.user!.uid;
         // print(userId);
         var docRef = _firestore.collection('user').doc(userId);
-        var userName = docRef.get().then((DocumentSnapshot doc) {
-          final data = doc.data() as Map<String, dynamic>;
+        var docSnapshot = await docRef.get();
+        if (docSnapshot.exists) {
+          final data = docSnapshot.data() as Map<String, dynamic>;
           res[1] = data['username'];
-        });
-        res[0] = 'success';
-        print(res);
+          res[0] = 'success';
+        } else {
+          res[0] = 'User document not found';
+        }
       } else {
         res[0] = 'Please fill in all fields';
       }
