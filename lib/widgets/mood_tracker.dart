@@ -7,6 +7,7 @@ class MoodTracker extends StatefulWidget {
 }
 
 class _MoodTracker extends State<MoodTracker> {
+  String? mood;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -31,38 +32,48 @@ class _MoodTracker extends State<MoodTracker> {
                       children: [
                         Expanded(
                           child: GestureDetector(
-                            onTap: () {},
+                            onTap: () {
+                              mood= 'Angry';
+                            },
                             child: Image.asset('assets/Angry.png'),
                           ),
                         ),
                         Expanded(
                           child: GestureDetector(
-                            onTap: () {},
+                            onTap: () {
+                              mood= 'Sad';
+                            },
                             child: Image.asset('assets/Sad.png'),
                           ),
                         ),
                         Expanded(
                           child: GestureDetector(
-                            onTap: () {},
+                            onTap: () {
+                              mood= 'Neutral';
+                            },
                             child: Image.asset('assets/Neutral.png'),
                           ),
                         ),
                         Expanded(
                           child: GestureDetector(
-                            onTap: () {},
+                            onTap: () {
+                              mood= 'Happy';
+                            },
                             child: Image.asset('assets/Happy.png'),
                           ),
                         ),
                         Expanded(
                           child: GestureDetector(
-                            onTap: () {},
+                            onTap: () {
+                              mood= 'Estatic';
+                            },
                             child: Image.asset('assets/Estatic.png'),
                           ),
                         ),
                       ],
                     )
                   ],
-                ),                
+                ),
               );
   }
 }

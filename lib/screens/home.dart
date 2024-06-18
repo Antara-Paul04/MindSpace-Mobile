@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:icons_plus/icons_plus.dart';
+import 'package:ms/screens/profile.dart';
 import 'package:ms/utils/colors.dart';
 import 'package:ms/widgets/main_drawer.dart';
 import 'package:ms/widgets/mood_tracker.dart';
@@ -73,6 +74,15 @@ class HomeScreen extends StatelessWidget {
                           color: primaryColour))),
               SizedBox(height: 20),
               MoodTracker(),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => ProfilePage()),
+                  );
+                },
+                child: Text('Go to Profile'),
+              )
             ],
           ),
         ),
