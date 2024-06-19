@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:ms/widgets/mood_stat.dart';
+import 'package:ms/widgets/sleep_stats.dart';
 import 'package:ms/utils/colors.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -10,7 +11,7 @@ class ProfilePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: bgColour,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: bgColour,
         actions: [
           Padding(
             padding: const EdgeInsets.all(15.0),
@@ -22,30 +23,40 @@ class ProfilePage extends StatelessWidget {
           ),
         ],
       ),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 30),
-          child: Column(children: [
-            SizedBox(height:20),
-            CircleAvatar(
-              backgroundImage: NetworkImage('https://avatars.githubusercontent.com/u/117584718?v=4'),
-              radius: 50,
-            ),
-            SizedBox(height:10),
-            Text('Antara Paul', style: GoogleFonts.lexend(color:primaryColour, fontSize: 27, fontWeight: FontWeight.w500)),
-            Text('@paulantara69', style: GoogleFonts.lexend(fontSize: 18, fontWeight: FontWeight.w300)),
-            SizedBox(height:20),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                'Your Analytics', 
-                style: GoogleFonts.lexend(fontSize: 27, fontWeight: FontWeight.w500)
-              )),
-            SizedBox(height:15),
-            MoodStats(),
-          ],),
+      body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 30),
+            child: Column(
+              children: [
+              SizedBox(height:20),
+              CircleAvatar(
+                backgroundImage: NetworkImage('https://avatars.githubusercontent.com/u/117584718?v=4'),
+                radius: 50,
+              ),
+              SizedBox(height:10),
+              Text('Antara Paul', style: GoogleFonts.lexend(color:primaryColour, fontSize: 27, fontWeight: FontWeight.w500)),
+              Text('@paulantara69', style: GoogleFonts.lexend(fontSize: 18, fontWeight: FontWeight.w300)),
+              SizedBox(height:20),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  'Your Analytics', 
+                  style: GoogleFonts.lexend(fontSize: 27, fontWeight: FontWeight.w500)
+                )),
+              SizedBox(height:15),
+              MoodStats(),
+              SizedBox(height:15),
+              Row(
+                children: [
+                  SleepStats(),
+                  SizedBox(width: 10,),
+                  SleepStats()
+                ],
+              ),
+              SizedBox(height:15),
+            ],),
+          ),
         ),
-      ),
     );
   }
 }
